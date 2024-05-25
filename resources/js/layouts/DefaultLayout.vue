@@ -1,9 +1,9 @@
 <template>
     <div class="min-h-full">
-        <Disclosure as="nav" class="bg-gray-800" v-slot="{ open }">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="flex h-16 items-center justify-between">
-                    <div class="flex items-center">
+        <Disclosure as="nav" v-slot="{ open }">
+            <div class="mx-auto px-4 sm:px-6 lg:px-8 h-24">
+                <div class="flex h-full items-center justify-between">
+                    <div class="flex items-center gap-x-20 w-3/5">
                         <div class="flex-shrink-0">
                             <img
                                 class="h-8 w-8"
@@ -11,7 +11,26 @@
                                 alt="Your Company"
                             />
                         </div>
-                        <div class="hidden md:block">
+                        <div class="hidden md:flex items-center">
+                            <div class="">
+                                <form action="">
+                                    <div
+                                        class="relative flex items-center text-gray-400 focus-within:text-gray-600"
+                                    >
+                                        <MagnifyingGlassIcon
+                                            class="w-4 h-4 absolute ml-3 pointer-event-none"
+                                        />
+                                        <input
+                                            type="text"
+                                            name="search"
+                                            placeholder="Start typing to search..."
+                                            autocomplete="off"
+                                            aria-label="Start typing to search..."
+                                            class="pr-3 pl-10 px-5 py-4 text-xs w-80 placeholder-gray-500 text-black rounded-3xl border-none focus:ring-0 bg-gray-100"
+                                        />
+                                    </div>
+                                </form>
+                            </div>
                             <div class="ml-10 flex items-baseline space-x-4">
                                 <router-link
                                     v-for="item in navigation"
@@ -19,11 +38,13 @@
                                     :to="item.to"
                                     :class="[
                                         this.$route.name === item.to.name
-                                            ? 'bg-gray-900 text-white'
-                                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                        'rounded-md px-3 py-2 text-sm font-medium',
+                                            ? 'bg-sky-500 text-white'
+                                            : 'text-gray-300',
+                                            'rounded-full'
                                     ]"
-                                    >{{ item.name }}</router-link
+                                    >
+                                    <component :is="item.icon" class="inline-block w-12 h-12 p-3" />
+                                    </router-link
                                 >
                             </div>
                         </div>
@@ -71,6 +92,7 @@
                                             v-for="item in userNavigation"
                                             :key="item.name"
                                             v-slot="{ active }"
+                                            @[item.eventName]="item.callback"
                                         >
                                             <a
                                                 :href="item.href"
@@ -160,7 +182,7 @@
                             as="a"
                             :href="item.href"
                             class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                            @click="handleEvent(item)"
+                            @[item.eventName]="item.callback"
                         >
                             {{ item.name }}</DisclosureButton
                         >
@@ -183,10 +205,19 @@ import {
     MenuItem,
     MenuItems,
 } from "@headlessui/vue";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/vue/24/outline";
+import {
+    Bars3Icon,
+    BellIcon,
+    XMarkIcon,
+    MagnifyingGlassIcon,
+    HomeIcon,
+    BoltIcon,
+    VideoCameraIcon,
+    UserGroupIcon
+} from "@heroicons/vue/24/outline";
 import { useStore } from "vuex";
 import { computed } from "vue";
-import { useRouter } from "vue-router"
+import { useRouter } from "vue-router";
 
 export default {
     components: {
@@ -200,29 +231,43 @@ export default {
         Bars3Icon,
         BellIcon,
         XMarkIcon,
+        MagnifyingGlassIcon,
+        HomeIcon,
+        VideoCameraIcon,
+        UserGroupIcon
     },
 
     setup() {
         const store = useStore();
+        const router = useRouter();
         const logout = () => {
-            store.commit('logout');
+            console.log(234);
+            store.commit("logout");
             router.push({
-                name: 'Login',
-            })
-        }
+                name: "Login",
+            });
+        };
         const navigation = [
-            { name: "Home", to: { name: "Home" } },
-            { name: "Stories", to: { name: "Stories" } },
-            { name: "Videos", to: { name: "Videos" } },
-            { name: "Groups", to: { name: "Groups" } },
+            { name: "Home", to: { name: "Home" }, icon: HomeIcon },
+            { name: "Stories", to: { name: "Stories" }, icon: BoltIcon },
+            { name: "Videos", to: { name: "Videos" }, icon: VideoCameraIcon },
+            { name: "Groups", to: { name: "Groups" } , icon: UserGroupIcon},
         ];
         const userNavigation = [
             { name: "Your Profile", href: "#" },
             { name: "Settings", href: "#" },
-            { name: "Sign out", href: "#", eventName: 'click', callback: logout },
+            {
+                name: "Sign out",
+                href: "#",
+                eventName: "click",
+                callback: logout,
+            },
         ];
         const handleEvent = (item) => {
-            if (item.eventName === 'click' && typeof item.callback === 'function') {
+            if (
+                item.eventName === "click" &&
+                typeof item.callback === "function"
+            ) {
                 item.callback();
             }
         };
@@ -230,7 +275,7 @@ export default {
             user: computed(() => store.state.user.data),
             navigation,
             userNavigation,
-            logout
+            logout,
         };
     },
 };

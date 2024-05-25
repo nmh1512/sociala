@@ -2,13 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
+    public function register(RegisterRequest $request)
+    {
+        try {
+            
+        } catch (Exception $e) {
+            Log::channel('schedule')->error('Error: '. $e->getMessage() .', File: '. $e->getFile() .', Line: '. $e->getFile());
+            return response()->json([
+                'error' => 'Something went wrong',
+                500
+            ]);
+        }
+    }
     /**
      * Get a JWT via given credentials.
      *
