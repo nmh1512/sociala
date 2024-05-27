@@ -1,15 +1,14 @@
 <template>
-    <div class="min-h-full">
-        <Disclosure as="nav" v-slot="{ open }">
-            <div class="mx-auto px-4 sm:px-6 lg:px-8 h-24">
+    <div class="min-h-full bg-light-theme-body relative">
+        <Disclosure as="nav" class="bg-white shadow-custom-xs" v-slot="{ open }">
+            <div class="mx-auto px-4 sm:px-6 lg:px-8 h-16 lg:h-24">
                 <div class="flex h-full items-center justify-between">
-                    <div class="flex items-center gap-x-20 w-3/5">
+                    <div class="flex items-center md:gap-x-4 lg:gap-x-20">
                         <div class="flex-shrink-0">
-                            <img
-                                class="h-8 w-8"
-                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                                alt="Your Company"
-                            />
+                            <router-link :to="{ name: 'Home' }" class="flex items-center gap-x-2.5 text-color-theme-blue">
+                                <BoltIcon class="w-7 h-7 lg:w-9 lg:h-9 text-success font-bold"/>
+                                <span class="font-bold text-2xl lg:text-4xl font-logoFont">Sociala.</span>
+                            </router-link>
                         </div>
                         <div class="hidden md:flex items-center">
                             <div class="">
@@ -23,23 +22,23 @@
                                         <input
                                             type="text"
                                             name="search"
-                                            placeholder="Start typing to search..."
+                                            :placeholder="$t('search_placeholder')"
                                             autocomplete="off"
-                                            aria-label="Start typing to search..."
-                                            class="pr-3 pl-10 px-5 py-4 text-xs w-80 placeholder-gray-500 text-black rounded-3xl border-none focus:ring-0 bg-gray-100"
+                                            :aria-label="$t('search_placeholder')"
+                                            class="pr-3 pl-10 px-5 py-4 text-xs md:w-48 lg:w-80 placeholder-gray-500 text-black rounded-3xl border-none focus:ring-0 bg-gray-100"
                                         />
                                     </div>
                                 </form>
                             </div>
-                            <div class="ml-10 flex items-baseline space-x-4">
+                            <div class="ml-3 lg:ml-10 flex items-baseline space-x-4">
                                 <router-link
                                     v-for="item in navigation"
                                     :key="item.name"
                                     :to="item.to"
                                     :class="[
                                         this.$route.name === item.to.name
-                                            ? 'bg-sky-500 text-white'
-                                            : 'text-gray-300',
+                                            ? 'bg-light-blue text-color-theme-blue'
+                                            : 'bg-gray-100 text-gray-400',
                                             'rounded-full'
                                     ]"
                                     >
@@ -50,7 +49,7 @@
                         </div>
                     </div>
                     <div class="hidden md:block">
-                        <div class="ml-4 flex items-center md:ml-6">
+                        <div class="flex items-center lg:ml-6">
                             <button
                                 type="button"
                                 class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -108,16 +107,19 @@
                             </Menu>
                         </div>
                     </div>
-                    <div class="-mr-2 flex md:hidden">
+                    <div class="-mr-2 flex md:hidden gap-x-4">
+                        <button @click="handleToggleSearchMobile" class="rounded-full h-11 w-11 p-3 bg-gray-100">
+                            <MagnifyingGlassIcon class="w-5 h-5 text-gray-900 font-bold"/>
+                        </button>
                         <!-- Mobile menu button -->
                         <DisclosureButton
-                            class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                            class="relative inline-flex items-center justify-center"
                         >
                             <span class="absolute -inset-0.5" />
                             <span class="sr-only">Open main menu</span>
-                            <Bars3Icon
+                            <Bars3BottomRightIcon
                                 v-if="!open"
-                                class="block h-6 w-6"
+                                class="block h-6 w-6 text-gray-900"
                                 aria-hidden="true"
                             />
                             <XMarkIcon
@@ -132,18 +134,25 @@
 
             <DisclosurePanel class="md:hidden">
                 <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                    <router-link
+                    <ul>  
+                        <li
                         v-for="item in navigation"
-                        :key="item.name"
-                        :to="item.to"
                         :class="[
-                            this.$route.name === item.to.name
-                                ? 'bg-gray-900 text-white'
-                                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                            'block rounded-md px-3 py-2 text-base font-medium',
-                        ]"
-                        >{{ item.name }}</router-link
-                    >
+                                    this.$route.name === item.to.name
+                                        ? 'bg-light-blue text-color-theme-blue'
+                                        : '',
+                                        'rounded-full'
+                                ]"
+                        >
+                            <router-link
+                                :key="item.name"
+                                :to="item.to"
+                                > 
+                                <component :is="item.icon" class="inline-block w-12 h-12 p-3" />
+                                <span>{{ item.name }}</span>
+                            </router-link>
+                        </li>
+                    </ul>
                 </div>
                 <div class="border-t border-gray-700 pb-3 pt-4">
                     <div class="flex items-center px-5">
@@ -191,7 +200,32 @@
             </DisclosurePanel>
         </Disclosure>
 
-        <router-view></router-view>
+        <div
+            :class="[
+                !isOpenSearch ? '-translate-y-full' : '',
+                'absolute top-0 w-full h-16 bg-white transition-all duration-500 ease-in-out flex items-center shadow-lg'
+            ]"
+        >
+            <form class="w-full" action="">
+                <input
+                    type="text"
+                    name="search"
+                    :placeholder="$t('search_placeholder_mobile')"
+                    autocomplete="off"
+                    :aria-label="$t('search_placeholder_mobile')"
+                    class="pr-3 pl-5 px-5 py-4 border-none w-full focus:border-none focus:ring-0"
+                />
+            </form>
+            <div class="flex items-center">
+                <XMarkIcon
+                    class="block h-7 w-7 mr-2 text-gray-400"
+                    aria-hidden="true"
+                    @click="handleToggleSearchMobile"
+                />
+            </div>
+        </div>
+        <Sidebar />
+        <router-view class="lg:ml-72"></router-view>
     </div>
 </template>
 
@@ -206,7 +240,7 @@ import {
     MenuItems,
 } from "@headlessui/vue";
 import {
-    Bars3Icon,
+    Bars3BottomRightIcon,
     BellIcon,
     XMarkIcon,
     MagnifyingGlassIcon,
@@ -216,8 +250,10 @@ import {
     UserGroupIcon
 } from "@heroicons/vue/24/outline";
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
+import { useI18n } from 'vue-i18n';
+import Sidebar from './../components/Sidebar.vue'
 
 export default {
     components: {
@@ -228,54 +264,57 @@ export default {
         MenuButton,
         MenuItem,
         MenuItems,
-        Bars3Icon,
+        Sidebar,
+        Bars3BottomRightIcon,
         BellIcon,
         XMarkIcon,
         MagnifyingGlassIcon,
         HomeIcon,
         VideoCameraIcon,
-        UserGroupIcon
+        UserGroupIcon,
+        BoltIcon
     },
 
     setup() {
+        const isOpenSearch = ref(false);
         const store = useStore();
         const router = useRouter();
+        const { t } = useI18n();
         const logout = () => {
-            console.log(234);
             store.commit("logout");
             router.push({
                 name: "Login",
             });
         };
         const navigation = [
-            { name: "Home", to: { name: "Home" }, icon: HomeIcon },
-            { name: "Stories", to: { name: "Stories" }, icon: BoltIcon },
-            { name: "Videos", to: { name: "Videos" }, icon: VideoCameraIcon },
-            { name: "Groups", to: { name: "Groups" } , icon: UserGroupIcon},
+            { name: t("home"), to: { name: "Home" }, icon: HomeIcon },
+            { name: t("stories"), to: { name: "Stories" }, icon: BoltIcon },
+            { name: t("videos"), to: { name: "Videos" }, icon: VideoCameraIcon },
+            { name: t("groups"), to: { name: "Groups" } , icon: UserGroupIcon},
         ];
         const userNavigation = [
-            { name: "Your Profile", href: "#" },
-            { name: "Settings", href: "#" },
+            { name: t("your_profile"), href: "#" },
+            { name: t("settings"), href: "#" },
             {
-                name: "Sign out",
+                name: t("sign_out"),
                 href: "#",
                 eventName: "click",
                 callback: logout,
             },
         ];
-        const handleEvent = (item) => {
-            if (
-                item.eventName === "click" &&
-                typeof item.callback === "function"
-            ) {
-                item.callback();
-            }
-        };
+
+        const handleToggleSearchMobile = () => {
+            isOpenSearch.value = !isOpenSearch.value
+        }
+
         return {
             user: computed(() => store.state.user.data),
             navigation,
             userNavigation,
             logout,
+            isOpenSearch,
+            handleToggleSearchMobile,
+            t
         };
     },
 };

@@ -6,7 +6,33 @@ export default {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'light-blue': '#d2e3ff',
+        'color-theme-red': '#ff3b30',
+        'color-theme-green': '#4cd964',
+        'color-theme-blue': '#0055ff',
+        'color-theme-pink-red': '#ff2d55',
+        'color-theme-yellow': '#ffcc00',
+        'color-theme-orange': '#ff9500',
+        'color-theme-gray': '#8e8e93',
+        'color-theme-brown': '#D2691E',
+        'color-theme-dark-green': '#228B22',
+        'color-theme-cade-tblue': '#5f9ea0',
+        'color-theme-purple': '#9932cc',
+        'success': '#10d876',
+        'light-theme-body': '#FBFCFE' 
+      },
+      fontFamily: {
+        logoFont: ['"Fredoka"', "cursive"],
+        sans: ['"Montserrat"', "sans-serif"]
+      },
+      boxShadow: {
+        'custom-xs': '0 .5rem 1rem rgba(0,0,0,.03)',
+        'custom-xss': '0 8px 30px rgba(0,0,0,.05)'
+      }
+    },
+    
   },
   plugins: [
     require('@tailwindcss/forms')
