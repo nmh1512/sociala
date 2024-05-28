@@ -52,7 +52,7 @@
                         <div class="flex items-center lg:ml-6">
                             <button
                                 type="button"
-                                class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                class="relative text-color-theme-blue"
                             >
                                 <span class="absolute -inset-1.5" />
                                 <span class="sr-only">View notifications</span>
@@ -225,8 +225,8 @@
             </div>
         </div>
         <NavLeft />
-        <router-view class="lg:ml-72"></router-view>
         <NavChat />
+        <router-view class="lg:ml-72"></router-view>
     </div>
 </template>
 

@@ -15,5 +15,7 @@
     "analytics": "Analytics",
     "chat": "Chat",
     "search_placeholder": "Start typing to search...",
-    "search_placeholder_mobile": "Search..."
+    "search_placeholder_mobile": "Search...",
+    "contacts": "Contacts",
+    "pages": "Pages"
 }
