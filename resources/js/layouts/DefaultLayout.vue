@@ -224,8 +224,9 @@
                 />
             </div>
         </div>
-        <Sidebar />
+        <NavLeft />
         <router-view class="lg:ml-72"></router-view>
+        <NavChat />
     </div>
 </template>
 
@@ -253,8 +254,8 @@ import { useStore } from "vuex";
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from 'vue-i18n';
-import Sidebar from './../components/Sidebar.vue'
-
+import NavLeft from '../components/NavLeft.vue'
+import NavChat from './../components/NavChat.vue'
 export default {
     components: {
         Disclosure,
@@ -264,7 +265,8 @@ export default {
         MenuButton,
         MenuItem,
         MenuItems,
-        Sidebar,
+        NavLeft,
+        NavChat,
         Bars3BottomRightIcon,
         BellIcon,
         XMarkIcon,
