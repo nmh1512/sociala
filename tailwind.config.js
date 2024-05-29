@@ -21,7 +21,7 @@ export default {
         'color-theme-cade-tblue': '#5f9ea0',
         'color-theme-purple': '#9932cc',
         'success': '#10d876',
-        'light-theme-body': '#FBFCFE' 
+        'light-theme-body': '#FBFCFE',
       },
       fontFamily: {
         logoFont: ['"Fredoka"', "cursive"],
@@ -33,12 +33,17 @@ export default {
       },
       fontSize: {
         'xxs': ['0.625rem', { lineHeight: '0.75rem' }],
+      },
+      width: {
+        '7/10': '70%',
+        '3/10': '30%'
       }
     },
     
   },
   plugins: [
-    require('@tailwindcss/forms')
+    require('@tailwindcss/forms'),
+    require('daisyui')
   ],
 }
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed right-0 h-screen lg:w-72 px-4 pt-2 bg-transparent">
+    <div class="fixed right-0 h-screen lg:w-72 px-4 pt-2 bg-transparent top-24">
         <div class="shadow-custom-xss rounded-2xl px-6 pb-2 mt-1 mb-3 bg-white">
             <div class="pt-4" v-for="sidebar in sideBars" :key="sidebar.key">
                 <span class="text-xxs font-semibold text-gray-400 uppercase">{{ sidebar.name }}</span>
@@ -30,18 +30,6 @@
 </template>
 
 <script>
-import {
-    ComputerDesktopIcon,
-    CheckBadgeIcon,
-    GlobeAltIcon,
-    BoltIcon,
-    Cog8ToothIcon,
-    ChartPieIcon,
-    ChatBubbleLeftIcon,
-    UserIcon
-    
-} from "@heroicons/vue/24/outline";
-
 import { useI18n } from 'vue-i18n';
 import { getColorTheme } from "../helpers/helpers";
 

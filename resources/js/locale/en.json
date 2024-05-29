@@ -17,5 +17,11 @@
     "search_placeholder": "Start typing to search...",
     "search_placeholder_mobile": "Search...",
     "contacts": "Contacts",
-    "pages": "Pages"
+    "pages": "Pages",
+    "friend_request": "Friend Request",
+    "see_all": "See All",
+    "mutual_friends": "mutual friends",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "suggest_groups": "Suggest Groups"
 }

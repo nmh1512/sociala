@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed h-screen lg:w-72 px-4 pt-2 bg-transparent">
+    <div class="fixed h-screen lg:w-72 px-4 pt-2 bg-transparent top-24">
         <div class="shadow-custom-xss rounded-2xl pt-3 px-6 pb-2 mt-1 mb-3 bg-white" v-for="sidebar in sideBars" :key="sidebar.key">
             <span class="text-xs font-semibold text-gray-400">{{ sidebar.name }}</span>
             <ul class="mt-2">  

@@ -1,6 +1,6 @@
 <template>
-    <div class="min-h-full bg-light-theme-body relative">
-        <Disclosure as="nav" class="bg-white shadow-custom-xs" v-slot="{ open }">
+    <div class="min-h-screen bg-light-theme-body relative">
+        <Disclosure as="nav" class="bg-white shadow-custom-xs fixed z-50 w-full" v-slot="{ open }">
             <div class="mx-auto px-4 sm:px-6 lg:px-8 h-16 lg:h-24">
                 <div class="flex h-full items-center justify-between">
                     <div class="flex items-center md:gap-x-4 lg:gap-x-20">
@@ -49,18 +49,30 @@
                         </div>
                     </div>
                     <div class="hidden md:block">
-                        <div class="flex items-center lg:ml-6">
+                        <div class="flex items-center lg:ml-6 gap-x-6">
                             <button
                                 type="button"
                                 class="relative text-color-theme-blue"
                             >
                                 <span class="absolute -inset-1.5" />
-                                <span class="sr-only">View notifications</span>
-                                <BellIcon class="h-6 w-6" aria-hidden="true" />
+                                <BellIcon class="h-8 w-8" aria-hidden="true" />
                             </button>
-
+                            <button
+                                type="button"
+                                class="relative text-color-theme-blue"
+                            >
+                                <span class="absolute -inset-1.5" />
+                                <ChatBubbleLeftIcon class="h-8 w-8" aria-hidden="true" />
+                            </button>
+                            <button
+                                type="button"
+                                class="relative text-color-theme-blue"
+                            >
+                                <span class="absolute -inset-1.5" />
+                                <Cog8ToothIcon class="h-8 w-8" aria-hidden="true" />
+                            </button>
                             <!-- Profile dropdown -->
-                            <Menu as="div" class="relative ml-3">
+                            <Menu as="div" class="relative">
                                 <div>
                                     <MenuButton
                                         class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -226,7 +238,7 @@
         </div>
         <NavLeft />
         <NavChat />
-        <router-view class="lg:ml-72"></router-view>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -248,7 +260,9 @@ import {
     HomeIcon,
     BoltIcon,
     VideoCameraIcon,
-    UserGroupIcon
+    UserGroupIcon,
+    ChatBubbleLeftIcon,
+    Cog8ToothIcon
 } from "@heroicons/vue/24/outline";
 import { useStore } from "vuex";
 import { ref, computed } from "vue";
@@ -274,7 +288,9 @@ export default {
         HomeIcon,
         VideoCameraIcon,
         UserGroupIcon,
-        BoltIcon
+        BoltIcon,
+        ChatBubbleLeftIcon,
+        Cog8ToothIcon
     },
 
     setup() {
