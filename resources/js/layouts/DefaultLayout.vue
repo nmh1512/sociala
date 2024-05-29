@@ -1,23 +1,23 @@
 <template>
     <div class="min-h-screen bg-light-theme-body relative">
-        <Disclosure as="nav" class="bg-white shadow-custom-xs fixed z-50 w-full" v-slot="{ open }">
+        <Disclosure as="nav" class="bg-white shadow-custom-xs fixed z-40 w-full" v-slot="{ open }">
             <div class="mx-auto px-4 sm:px-6 lg:px-8 h-16 lg:h-24">
                 <div class="flex h-full items-center justify-between">
-                    <div class="flex items-center md:gap-x-4 lg:gap-x-20">
+                    <div class="flex items-center gap-x-2 md:gap-x-4  xl:gap-x-20">
                         <div class="flex-shrink-0">
                             <router-link :to="{ name: 'Home' }" class="flex items-center gap-x-2.5 text-color-theme-blue">
                                 <BoltIcon class="w-7 h-7 lg:w-9 lg:h-9 text-success font-bold"/>
                                 <span class="font-bold text-2xl lg:text-4xl font-logoFont">Sociala.</span>
                             </router-link>
                         </div>
-                        <div class="hidden md:flex items-center">
+                        <div class="hidden sm:flex items-center">
                             <div class="">
                                 <form action="">
                                     <div
                                         class="relative flex items-center text-gray-400 focus-within:text-gray-600"
                                     >
                                         <MagnifyingGlassIcon
-                                            class="w-4 h-4 absolute ml-3 pointer-event-none"
+                                            class="w-4 h-4 absolute ml-2 md:ml-3 pointer-event-none"
                                         />
                                         <input
                                             type="text"
@@ -25,12 +25,12 @@
                                             :placeholder="$t('search_placeholder')"
                                             autocomplete="off"
                                             :aria-label="$t('search_placeholder')"
-                                            class="pr-3 pl-10 px-5 py-4 text-xs md:w-48 lg:w-80 placeholder-gray-500 text-black rounded-3xl border-none focus:ring-0 bg-gray-100"
+                                            class="pr-3 pl-7 md:pl-10 py-3 md:py-4 text-xxs md:text-xs md:w-48 lg:w-64 xl:w-80 placeholder-gray-500 text-black rounded-3xl border-none focus:ring-0 bg-gray-100"
                                         />
                                     </div>
                                 </form>
                             </div>
-                            <div class="ml-3 lg:ml-10 flex items-baseline space-x-4">
+                            <div class="ml-3 lg:ml-10 flex items-baseline space-x-2 lg:space-x-4">
                                 <router-link
                                     v-for="item in navigation"
                                     :key="item.name"
@@ -42,47 +42,48 @@
                                             'rounded-full'
                                     ]"
                                     >
-                                    <component :is="item.icon" class="inline-block w-12 h-12 p-3" />
+                                    <component :is="item.icon" class="inline-block w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 p-2 lg:p-3" />
                                     </router-link
                                 >
                             </div>
                         </div>
                     </div>
-                    <div class="hidden md:block">
-                        <div class="flex items-center lg:ml-6 gap-x-6">
+                    <div class="hidden sm:block">
+                        <div class="flex items-center lg:ml-6 gap-x-2 md:gap-x-6">
                             <button
                                 type="button"
                                 class="relative text-color-theme-blue"
                             >
                                 <span class="absolute -inset-1.5" />
-                                <BellIcon class="h-8 w-8" aria-hidden="true" />
+                                <BellIcon class="h-6 w-6 md:h-8 md:w-8" aria-hidden="true" />
+                            </button>
+                            <button
+                                type="button"
+                                class="relative text-color-theme-blue"
+                                @click="handleToogleNavChat"
+                            >
+                                <span class="absolute -inset-1.5" />
+                                <ChatBubbleLeftIcon class="h-6 w-6 md:h-8 md:w-8 focus:ring-0" aria-hidden="true" />
                             </button>
                             <button
                                 type="button"
                                 class="relative text-color-theme-blue"
                             >
                                 <span class="absolute -inset-1.5" />
-                                <ChatBubbleLeftIcon class="h-8 w-8" aria-hidden="true" />
-                            </button>
-                            <button
-                                type="button"
-                                class="relative text-color-theme-blue"
-                            >
-                                <span class="absolute -inset-1.5" />
-                                <Cog8ToothIcon class="h-8 w-8" aria-hidden="true" />
+                                <Cog8ToothIcon class="h-6 w-6 md:h-8 md:w-8" aria-hidden="true" />
                             </button>
                             <!-- Profile dropdown -->
                             <Menu as="div" class="relative">
                                 <div>
                                     <MenuButton
-                                        class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                        class="relative flex h-6 w-6 md:h-8 md:w-8 items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                                     >
                                         <span class="absolute -inset-1.5" />
                                         <span class="sr-only"
                                             >Open user menu</span
                                         >
                                         <img
-                                            class="h-8 w-8 rounded-full"
+                                            class="h-6 w-6 md:h-8 md:w-8 rounded-full"
                                             :src="user.imageUrl"
                                             alt=""
                                         />
@@ -119,13 +120,14 @@
                             </Menu>
                         </div>
                     </div>
-                    <div class="-mr-2 flex md:hidden gap-x-4">
+                    <div class="-mr-2 flex sm:hidden gap-x-4">
                         <button @click="handleToggleSearchMobile" class="rounded-full h-11 w-11 p-3 bg-gray-100">
                             <MagnifyingGlassIcon class="w-5 h-5 text-gray-900 font-bold"/>
                         </button>
                         <!-- Mobile menu button -->
                         <DisclosureButton
                             class="relative inline-flex items-center justify-center"
+                            @click="handleToogleNavLeft"
                         >
                             <span class="absolute -inset-0.5" />
                             <span class="sr-only">Open main menu</span>
@@ -133,89 +135,23 @@
                                 v-if="!open"
                                 class="block h-6 w-6 text-gray-900"
                                 aria-hidden="true"
+                                @click="handleToogleNavLeft"
                             />
                             <XMarkIcon
                                 v-else
-                                class="block h-6 w-6"
+                                class="block h-6 w-6 text-gray-900"
                                 aria-hidden="true"
                             />
                         </DisclosureButton>
                     </div>
                 </div>
             </div>
-
-            <DisclosurePanel class="md:hidden">
-                <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                    <ul>  
-                        <li
-                        v-for="item in navigation"
-                        :class="[
-                                    this.$route.name === item.to.name
-                                        ? 'bg-light-blue text-color-theme-blue'
-                                        : '',
-                                        'rounded-full'
-                                ]"
-                        >
-                            <router-link
-                                :key="item.name"
-                                :to="item.to"
-                                > 
-                                <component :is="item.icon" class="inline-block w-12 h-12 p-3" />
-                                <span>{{ item.name }}</span>
-                            </router-link>
-                        </li>
-                    </ul>
-                </div>
-                <div class="border-t border-gray-700 pb-3 pt-4">
-                    <div class="flex items-center px-5">
-                        <div class="flex-shrink-0">
-                            <img
-                                class="h-10 w-10 rounded-full"
-                                :src="user.imageUrl"
-                                alt=""
-                            />
-                        </div>
-                        <div class="ml-3">
-                            <div
-                                class="text-base font-medium leading-none text-white"
-                            >
-                                {{ user.name }}
-                            </div>
-                            <div
-                                class="text-sm font-medium leading-none text-gray-400"
-                            >
-                                {{ user.email }}
-                            </div>
-                        </div>
-                        <button
-                            type="button"
-                            class="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                        >
-                            <span class="absolute -inset-1.5" />
-                            <span class="sr-only">View notifications</span>
-                            <BellIcon class="h-6 w-6" aria-hidden="true" />
-                        </button>
-                    </div>
-                    <div class="mt-3 space-y-1 px-2">
-                        <DisclosureButton
-                            v-for="item in userNavigation"
-                            :key="item.name"
-                            as="a"
-                            :href="item.href"
-                            class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                            @[item.eventName]="item.callback"
-                        >
-                            {{ item.name }}</DisclosureButton
-                        >
-                    </div>
-                </div>
-            </DisclosurePanel>
         </Disclosure>
 
         <div
             :class="[
                 !isOpenSearch ? '-translate-y-full' : '',
-                'absolute top-0 w-full h-16 bg-white transition-all duration-500 ease-in-out flex items-center shadow-lg'
+                'absolute top-0 w-full h-16 bg-white transition-all duration-500 ease-in-out flex items-center shadow-lg z-50'
             ]"
         >
             <form class="w-full" action="">
@@ -236,8 +172,8 @@
                 />
             </div>
         </div>
-        <NavLeft />
-        <NavChat />
+        <NavLeft ref="navLeftRef" />
+        <NavChat ref="navChatRef" />
         <router-view></router-view>
     </div>
 </template>
@@ -294,6 +230,8 @@ export default {
     },
 
     setup() {
+        const navLeftRef = ref(null);
+        const navChatRef = ref(null);
         const isOpenSearch = ref(false);
         const store = useStore();
         const router = useRouter();
@@ -324,7 +262,16 @@ export default {
         const handleToggleSearchMobile = () => {
             isOpenSearch.value = !isOpenSearch.value
         }
-
+        const handleToogleNavChat = () => {
+            if (navChatRef.value) {
+                navChatRef.value.toogleNavChat();
+            }
+        };
+        const handleToogleNavLeft = () => {
+            if (navLeftRef.value) {
+                navLeftRef.value.toogleNavLeft();
+            }
+        };
         return {
             user: computed(() => store.state.user.data),
             navigation,
@@ -332,6 +279,10 @@ export default {
             logout,
             isOpenSearch,
             handleToggleSearchMobile,
+            handleToogleNavChat,
+            handleToogleNavLeft,
+            navLeftRef,
+            navChatRef,
             t
         };
     },

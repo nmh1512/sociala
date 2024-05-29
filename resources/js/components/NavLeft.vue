@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed h-screen lg:w-72 px-4 pt-2 bg-transparent top-24">
+    <div ref="selfRef" class="fixed h-screen w-72 px-4 pt-2 shadow-custom-3 sm:shadow-none bg-gray-100 sm:bg-transparent z-50 sm:z-0 top-0 sm:top-16 lg:top-24 -left-72 sm:left-0 transition-all duration-500 ease-in-out">
         <div class="shadow-custom-xss rounded-2xl pt-3 px-6 pb-2 mt-1 mb-3 bg-white" v-for="sidebar in sideBars" :key="sidebar.key">
             <span class="text-xs font-semibold text-gray-400">{{ sidebar.name }}</span>
             <ul class="mt-2">  
@@ -36,13 +36,15 @@ import {
     
 } from "@heroicons/vue/24/outline";
 
+import { ref, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { getColorTheme } from "../helpers/helpers";
 
 export default {
     setup() {
         const { t } = useI18n();
-
+        const selfRef = ref(null);
+        const isShowNavLeft = ref(true)
         const sideBars = [
             {
                 name: t('new_feeds'),
@@ -73,10 +75,35 @@ export default {
             },
             
         ]
+        const checkPosition = () => {
+            const element = selfRef.value;
+            if (element) {
+                const left = window.getComputedStyle(element).right;
+                isShowNavLeft.value = left == '0px'
+            }
+        };
 
+        onMounted(() => {
+            checkPosition();
+        });
+        const toogleNavLeft = () => {
+            isShowNavLeft.value = !isShowNavLeft.value;
+            if (isShowNavLeft.value) {
+                selfRef.value.classList.add('left-0')
+                selfRef.value.classList.remove('-left-72')
+            } else {
+                selfRef.value.classList.remove('sm:left-0')
+                selfRef.value.classList.remove('left-0')
+                selfRef.value.classList.add('-left-72')
+            }
+        }
         return {
             sideBars,
-            getColorTheme
+            getColorTheme,
+            toogleNavLeft,
+            checkPosition,
+            isShowNavLeft,
+            selfRef
         }
     }
 }

@@ -29,7 +29,8 @@ export default {
       },
       boxShadow: {
         'custom-xs': '0 .5rem 1rem rgba(0,0,0,.03)',
-        'custom-xss': '0 8px 30px rgba(0,0,0,.05)'
+        'custom-xss': '0 8px 30px rgba(0,0,0,.05)',
+        'custom-3': '0 1rem 3rem rgba(0,0,0,.18)'
       },
       fontSize: {
         'xxs': ['0.625rem', { lineHeight: '0.75rem' }],

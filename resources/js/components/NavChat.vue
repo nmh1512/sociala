@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed right-0 h-screen lg:w-72 px-4 pt-2 bg-transparent top-24">
+    <div ref="selfRef" class="fixed h-screen w-72 px-4 pt-2 bg-transparent top-16 lg:top-24 backdrop-blur-xl -right-72 2xl:backdrop-blur-none 2xl:right-0 transition-all duration-500 ease-in-out">
         <div class="shadow-custom-xss rounded-2xl px-6 pb-2 mt-1 mb-3 bg-white">
             <div class="pt-4" v-for="sidebar in sideBars" :key="sidebar.key">
                 <span class="text-xxs font-semibold text-gray-400 uppercase">{{ sidebar.name }}</span>
@@ -30,13 +30,15 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { getColorTheme } from "../helpers/helpers";
 
 export default {
     setup() {
         const { t } = useI18n();
-
+        const selfRef = ref(null);
+        const isShowNavChat = ref(true)
         const sideBars = [
             {
                 name: t('contacts'),
@@ -63,10 +65,35 @@ export default {
                 ]
             }
         ]
+        const checkPosition = () => {
+            const element = selfRef.value;
+            if (element) {
+                const right = window.getComputedStyle(element).right;
+                isShowNavChat.value = right == '0px'
+            }
+        };
 
+        onMounted(() => {
+            checkPosition();
+        });
+        const toogleNavChat = () => {
+            isShowNavChat.value = !isShowNavChat.value;
+            if (isShowNavChat.value) {
+                selfRef.value.classList.add('right-0')
+                selfRef.value.classList.remove('-right-72')
+            } else {
+                selfRef.value.classList.remove('2xl:right-0')
+                selfRef.value.classList.remove('right-0')
+                selfRef.value.classList.add('-right-72')
+            }
+        }
         return {
             sideBars,
-            getColorTheme
+            getColorTheme,
+            toogleNavChat,
+            selfRef,
+            checkPosition,
+            isShowNavChat
         }
     }
 }

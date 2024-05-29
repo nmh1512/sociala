@@ -1,10 +1,10 @@
 <template>
     <PageComponent>
         <div class="flex gap-x-4">
-            <div class="flex-initial w-7/10">
+            <div class="flex-initial w-full lg:w-7/10">
                 <StoriesComponent />
             </div>
-            <div class="flex-initial w-3/10">
+            <div class="flex-initial hidden lg:block w-3/10">
                 <div class="bg-white shadow-custom-xs rounded-2xl">
                     <div class="flex justify-between items-center p-6 border-b border-b-gray-200">
                         <h4 class="text-gray-900 text-xs font-bold">{{ $t("friend_request") }}</h4>
@@ -48,7 +48,7 @@
                             </router-link>
                             <div class="mt-1">
                                 <p class="text-gray-800 font-bold text-xs">{{ group.name }}</p>
-                                <ul class="relative h-9">
+                                <ul class="relative h-9 mt-1">
                                     <li class="absolute" v-for="item in group.memberJoined">
                                         <img class="w-9 h-9" :src="item.avatar" alt="">
                                     </li>
@@ -87,10 +87,10 @@ export default {
                 avatar: "", 
                 memberJoined: 
                     [
-                        { name: "Hurin Seary", avatar: ""},
-                        { name: "Victor Exrixon", avatar: ""},
-                        { name: "Surfiya Zakir", avatar: ""},
-                        { name: "Goria Coast", avatar: ""},
+                        { name: "Hurin Seary", avatar: "https://uitheme.net/sociala/images/user-6.png"},
+                        { name: "Victor Exrixon", avatar: "https://uitheme.net/sociala/images/user-7.png"},
+                        { name: "Surfiya Zakir", avatar: "https://uitheme.net/sociala/images/user-8.png"},
+                        { name: "Goria Coast", avatar: "https://uitheme.net/sociala/images/user-9.png"},
                     ]
             },
             { 
