@@ -38,7 +38,10 @@ export default {
       width: {
         '7/10': '70%',
         '3/10': '30%'
-      }
+      },
+      backgroundImage: theme => ({
+        'story-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.01) 60%, rgba(0, 0, 0, 0.9) 100%)',
+      }),
     },
     
   },

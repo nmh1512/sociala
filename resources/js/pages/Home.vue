@@ -49,8 +49,13 @@
                             <div class="mt-1">
                                 <p class="text-gray-800 font-bold text-xs">{{ group.name }}</p>
                                 <ul class="relative h-9 mt-1">
-                                    <li class="absolute" v-for="item in group.memberJoined">
+                                    <li 
+                                    :class="['absolute', `left-[${key * 22}px]`]"
+                                    v-for="(item, key) in group.memberJoined">
                                         <img class="w-9 h-9" :src="item.avatar" alt="">
+                                    </li>
+                                    <li class="absolute left-[88px] min-w-9 h-9 px-1 bg-gray-100 leading-9 text-center rounded-full">
+                                        <span class="text-xs">+ 10</span>
                                     </li>
                                 </ul>
                             </div>
@@ -105,6 +110,7 @@ export default {
                     ]
             },
         ];
+        
         return {
             t,
             friendRequest,
