@@ -22,6 +22,7 @@ export default {
         'color-theme-purple': '#9932cc',
         'success': '#10d876',
         'light-theme-body': '#FBFCFE',
+        'warning': '#fe9431'
       },
       fontFamily: {
         logoFont: ['"Fredoka"', "cursive"],

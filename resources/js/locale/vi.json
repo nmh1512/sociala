@@ -24,5 +24,10 @@
     "confirm": "Xác nhận",
     "delete": "Xóa",
     "suggest_groups": "Nhóm đề xuất",
-    "add_story": "Thêm Story"
+    "add_story": "Thêm Story",
+    "create_post": "Bài viết mới",
+    "create_post_placeholder": "Bạn đang nghĩ gì?",
+    "photo_or_video": "Ảnh/video",
+    "feeling_or_activity": "Cảm xúc/hoạt động"
+
 }

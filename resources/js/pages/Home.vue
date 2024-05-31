@@ -2,7 +2,8 @@
     <PageComponent>
         <div class="flex gap-x-4">
             <div class="flex-initial w-full lg:w-7/10">
-                <StoriesComponent />
+                <Stories />
+                <CreatePost />
             </div>
             <div class="flex-initial hidden lg:block w-3/10">
                 <div class="bg-white shadow-custom-xs rounded-2xl">
@@ -69,14 +70,16 @@
 
 <script>
 import PageComponent from './../components/PageComponent.vue'
-import StoriesComponent from './../components/StoriesComponent.vue'
+import Stories from '../components/Stories.vue'
+import CreatePost from './../components/CreatePost.vue'
 import { useI18n } from 'vue-i18n';
 import { getColorTheme } from "../helpers/helpers";
 
 export default {
     components: {
         PageComponent,
-        StoriesComponent,
+        Stories,
+        CreatePost
     },
     setup() {
         const { t } = useI18n();
