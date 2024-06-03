@@ -24,5 +24,10 @@
     "confirm": "Confirm",
     "delete": "Delete",
     "suggest_groups": "Suggest Groups",
-    "add_story": "Add Story"
+    "add_story": "Add Story",
+    "hour": "hour",
+    "ago": "ago",
+    "see_more": "See more",
+    "comments": "Comments",
+    "share": "Share"
 }

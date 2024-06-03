@@ -22,6 +22,8 @@ export default {
         'color-theme-purple': '#9932cc',
         'success': '#10d876',
         'light-theme-body': '#FBFCFE',
+        'custom-primary': '#1e74fd',
+        'rba-06': 'rgba(0,0,0,.6)'
       },
       fontFamily: {
         logoFont: ['"Fredoka"', "cursive"],
@@ -41,6 +43,8 @@ export default {
       },
       backgroundImage: theme => ({
         'story-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.01) 60%, rgba(0, 0, 0, 0.9) 100%)',
+        'primary-gradient': 'linear-gradient(135deg, #05f, #09f)',
+        'red-gradient': 'linear-gradient(to right, #e44d26, #f16529)'
       }),
     },
     
