@@ -23,7 +23,8 @@ export default {
         'success': '#10d876',
         'light-theme-body': '#FBFCFE',
         'custom-primary': '#1e74fd',
-        'rba-06': 'rgba(0,0,0,.6)'
+        'rba-06': 'rgba(0,0,0,.6)',
+        'warning': '#fe9431'
       },
       fontFamily: {
         logoFont: ['"Fredoka"', "cursive"],

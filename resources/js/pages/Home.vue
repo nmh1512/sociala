@@ -3,6 +3,7 @@
         <div class="flex gap-x-4">
             <div class="flex-initial w-full lg:w-7/10">
                 <Stories />
+                <CreatePost />
                 <Post />
             </div>
             <div class="flex-initial hidden lg:block w-3/10">

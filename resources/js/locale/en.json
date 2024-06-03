@@ -29,5 +29,9 @@
     "ago": "ago",
     "see_more": "See more",
     "comments": "Comments",
-    "share": "Share"
+    "share": "Share",
+    "create_post": "Create Post",
+    "create_post_placeholder": "What's on your mind?",
+    "photo_or_video": "Photo/Video",
+    "feeling_or_activity": "Feeling/Activity"
 }
