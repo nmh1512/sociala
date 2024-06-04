@@ -27,7 +27,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import {
     CameraIcon,
     PencilSquareIcon,
@@ -35,17 +35,6 @@ import {
 } from "@heroicons/vue/24/outline";
 import { useI18n } from 'vue-i18n';
 
-export default {
-    components: {
-        PencilSquareIcon,
-        PhotoIcon,
-        CameraIcon
-    },
-    setup() {
-        const { t } = useI18n();
-        return {
-            t,
-        }
-    }
-}
+const { t } = useI18n();
+
 </script>

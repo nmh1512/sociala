@@ -16,10 +16,18 @@ const i18n = createI18n({
         vi: VI
     }
 })
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
+import { faClone } from '@fortawesome/free-regular-svg-icons'
+import { faFacebookF, faXTwitter, faLinkedinIn, faInstagram, faPinterestP } from '@fortawesome/free-brands-svg-icons'
+
+library.add(faEllipsis, faXTwitter, faFacebookF, faLinkedinIn, faInstagram, faPinterestP, faClone)
 
 const app = createApp(App);
 app.use(router)
     .provide('$store', store)
+    .component('font-awesome-icon', FontAwesomeIcon)
     .use(store)
     .use(i18n)
     .mount("#app");

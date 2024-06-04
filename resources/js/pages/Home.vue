@@ -73,6 +73,7 @@
 import Post from './../components/Post.vue'
 import PageComponent from './../components/PageComponent.vue'
 import Stories from './../components/Stories.vue'
+import CreatePost from '../components/CreatePost.vue';
 import { useI18n } from 'vue-i18n';
 import { getColorTheme } from "../helpers/helpers";
 
