@@ -21,7 +21,7 @@
     </swiper-slide>
   </swiper>
 </template>
-<script>
+<script setup>
 import {
     PlusIcon
 } from "@heroicons/vue/24/outline";
@@ -31,74 +31,62 @@ import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
 import { useI18n } from 'vue-i18n';
 
-export default {
-  components: {
-    Swiper,
-    SwiperSlide,
-    PlusIcon
-  },
-  setup() {
-    const { t } = useI18n();
+const { t } = useI18n();
     
-    const stories = [
-      {
-        name: "Victor Exrixon",
-        avatar: "https://uitheme.net/sociala/images/user-11.png",
-        image: "https://uitheme.net/sociala/images/s-1.jpg"
-      },
-      {
-        name: "Victor Exrixon",
-        avatar: "https://uitheme.net/sociala/images/user-11.png",
-        image: "https://uitheme.net/sociala/images/s-1.jpg"
-      },
-      {
-        name: "Victor Exrixon",
-        avatar: "https://uitheme.net/sociala/images/user-11.png",
-        image: "https://uitheme.net/sociala/images/s-1.jpg"
-      },
-      {
-        name: "Victor Exrixon",
-        avatar: "https://uitheme.net/sociala/images/user-11.png",
-        image: "https://uitheme.net/sociala/images/s-1.jpg"
-      },
-      {
-        name: "Victor Exrixon",
-        avatar: "https://uitheme.net/sociala/images/user-11.png",
-        image: "https://uitheme.net/sociala/images/s-1.jpg"
-      },
-      {
-        name: "Victor Exrixon",
-        avatar: "https://uitheme.net/sociala/images/user-11.png",
-        image: "https://uitheme.net/sociala/images/s-1.jpg"
-      },
-      {
-        name: "Victor Exrixon",
-        avatar: "https://uitheme.net/sociala/images/user-11.png",
-        image: "https://uitheme.net/sociala/images/s-1.jpg"
-      },
-      {
-        name: "Victor Exrixon",
-        avatar: "https://uitheme.net/sociala/images/user-11.png",
-        image: "https://uitheme.net/sociala/images/s-1.jpg"
-      },
-      {
-        name: "Victor Exrixon",
-        avatar: "https://uitheme.net/sociala/images/user-11.png",
-        image: "https://uitheme.net/sociala/images/s-1.jpg"
-      },
-      {
-        name: "Victor Exrixon",
-        avatar: "https://uitheme.net/sociala/images/user-11.png",
-        image: "https://uitheme.net/sociala/images/s-1.jpg"
-      },
-    ]
-    return {
-      t,
-      modules: [Pagination, Navigation],
-      stories
-    };
+const stories = [
+  {
+    name: "Victor Exrixon",
+    avatar: "https://uitheme.net/sociala/images/user-11.png",
+    image: "https://uitheme.net/sociala/images/s-1.jpg"
   },
-};
+  {
+    name: "Victor Exrixon",
+    avatar: "https://uitheme.net/sociala/images/user-11.png",
+    image: "https://uitheme.net/sociala/images/s-1.jpg"
+  },
+  {
+    name: "Victor Exrixon",
+    avatar: "https://uitheme.net/sociala/images/user-11.png",
+    image: "https://uitheme.net/sociala/images/s-1.jpg"
+  },
+  {
+    name: "Victor Exrixon",
+    avatar: "https://uitheme.net/sociala/images/user-11.png",
+    image: "https://uitheme.net/sociala/images/s-1.jpg"
+  },
+  {
+    name: "Victor Exrixon",
+    avatar: "https://uitheme.net/sociala/images/user-11.png",
+    image: "https://uitheme.net/sociala/images/s-1.jpg"
+  },
+  {
+    name: "Victor Exrixon",
+    avatar: "https://uitheme.net/sociala/images/user-11.png",
+    image: "https://uitheme.net/sociala/images/s-1.jpg"
+  },
+  {
+    name: "Victor Exrixon",
+    avatar: "https://uitheme.net/sociala/images/user-11.png",
+    image: "https://uitheme.net/sociala/images/s-1.jpg"
+  },
+  {
+    name: "Victor Exrixon",
+    avatar: "https://uitheme.net/sociala/images/user-11.png",
+    image: "https://uitheme.net/sociala/images/s-1.jpg"
+  },
+  {
+    name: "Victor Exrixon",
+    avatar: "https://uitheme.net/sociala/images/user-11.png",
+    image: "https://uitheme.net/sociala/images/s-1.jpg"
+  },
+  {
+    name: "Victor Exrixon",
+    avatar: "https://uitheme.net/sociala/images/user-11.png",
+    image: "https://uitheme.net/sociala/images/s-1.jpg"
+  },
+]
+const modules = [Pagination, Navigation];
+    
 </script>
 <style>
 .swiper {
