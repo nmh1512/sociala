@@ -1,5 +1,5 @@
 <template>
-    <div class="px-5 pt-5 pb-4 mt-4 bg-white rounded-2xl w-full shadow-custom-xss">
+    <div class="px-6 pt-5 pb-4 mt-4 bg-white rounded-2xl w-full shadow-custom-xss">
         <form action="">
             <div class="flex items-center gap-x-2">
                 <div class="w-9 h-9 rounded-full bg-gray-100 p-2">
