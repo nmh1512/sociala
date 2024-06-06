@@ -34,5 +34,13 @@
     "create_post_placeholder": "What's on your mind?",
     "photo_or_video": "Photo/Video",
     "feeling_or_activity": "Feeling/Activity",
-    "copy_link": "Copy link"
+    "copy_link": "Copy link",
+    "save_link": "Save link",
+    "save_link_desc": "Add this to your saved items",
+    "hide_post": "Hide Post",
+    "hide_post_desc": "Hide similar posts",
+    "hide_all_from": "Hide all from",
+    "hide_all_from_desc": "Stop seeing posts but stay in the group",
+    "follow": "Follow",
+    "unfollow": "Unfollow"
 }

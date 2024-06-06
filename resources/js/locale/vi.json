@@ -34,6 +34,13 @@
     "create_post_placeholder": "Bạn đang nghĩ gì?",
     "photo_or_video": "Ảnh/video",
     "feeling_or_activity": "Cảm xúc/hoạt động",
-    "copy_link": "Sao chép đường dẫn"
-
+    "copy_link": "Sao chép đường dẫn",
+    "save_link": "Lưu đường dẫn",
+    "save_link_desc": "Thêm vào các mục đã lưu của bạn",
+    "hide_post": "Ẩn bài viết",
+    "hide_post_desc": "Ẩn bớt các bài viết tương tự",
+    "hide_all_from": "Ẩn tất cả từ",
+    "hide_all_from_desc": "Không xem bài viết nữa nhưng vẫn ở trong nhóm",
+    "follow": "Theo dõi",
+    "unfollow": "Bỏ theo dõi"
 }

@@ -3,9 +3,11 @@ import { onMounted, onBeforeUnmount } from 'vue';
 let isAdjusting = false;
 
 export const adjustPopoverPosition = (selfRef) => {
+    if (!selfRef.value) return
     const popover = selfRef.value.$el;
-    const popoverRect = popover.getBoundingClientRect();
+    if (!popover) return
     
+    const popoverRect = popover.getBoundingClientRect();
     if (popoverRect.bottom > window.innerHeight) {
         popover.classList.add('bottom-10');
         popover.classList.remove('top-8');

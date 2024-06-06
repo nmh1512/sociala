@@ -1,8 +1,8 @@
 <template>
-    <PopoverPanel ref="selfRef" class="absolute z-10 top-8 right-0 shadow-custom-lg p-5 rounded-lg bg-white">
+    <PopoverPanel ref="selfRef" class="absolute z-10 top-8 right-0 shadow-custom-lg p-5 rounded-2xl bg-white">
         <div class="flex items-center justify-between">
             <span class="font-bold text-gray-800 text-base">{{ $t("share") }}</span>
-            <div @click="close" role="button" class="w-6 h-6 rounded-full bg-gray-100 p-1">
+            <div @click="close($event)" role="button" class="w-6 h-6 rounded-full bg-gray-100 p-1">
                 <XMarkIcon class="w-4 h-4" />
             </div>
         </div>

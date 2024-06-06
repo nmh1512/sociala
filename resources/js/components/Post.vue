@@ -9,69 +9,14 @@
                 </div>
             </div>
             <Menu as="div" class="relative">
-                <MenuButton class="rounded-full w-11 h-11 p-3 bg-gray-100 text-gray-700">
+                <MenuButton @click="handleToggleModal($event, 'modalPostActionVisible')" class="rounded-full w-11 h-11 p-3 bg-gray-100 text-gray-700 focus:outline-none">
                     <font-awesome-icon icon="fa-solid fa-ellipsis" class="w-full h-4" />
                 </MenuButton>
                 <transition enter-active-class="transition duration-200 ease-out"
                     enter-from-class="translate-y-1 opacity-0" enter-to-class="translate-y-0 opacity-100"
                     leave-active-class="transition duration-150 ease-in" leave-from-class="translate-y-0 opacity-100"
                     leave-to-class="translate-y-1 opacity-0">
-                    <MenuItems
-                        class="absolute z-30 right-0 mt-4 shadow-custom-lg p-5 rounded-lg bg-white">
-                        <div class="px-1 py-1">
-                            <MenuItem v-slot="{ active }">
-                            <button :class="[
-                                active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                            ]">
-                                <EditIcon :active="active" class="mr-2 h-5 w-5 text-violet-400" aria-hidden="true" />
-                                Edit
-                            </button>
-                            </MenuItem>
-                            <MenuItem v-slot="{ active }">
-                            <button :class="[
-                                active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                            ]">
-                                <DuplicateIcon :active="active" class="mr-2 h-5 w-5 text-violet-400"
-                                    aria-hidden="true" />
-                                Duplicate
-                            </button>
-                            </MenuItem>
-                        </div>
-                        <div class="px-1 py-1">
-                            <MenuItem v-slot="{ active }">
-                            <button :class="[
-                                active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                            ]">
-                                <ArchiveIcon :active="active" class="mr-2 h-5 w-5 text-violet-400" aria-hidden="true" />
-                                Archive
-                            </button>
-                            </MenuItem>
-                            <MenuItem v-slot="{ active }">
-                            <button :class="[
-                                active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                            ]">
-                                <MoveIcon :active="active" class="mr-2 h-5 w-5 text-violet-400" aria-hidden="true" />
-                                Move
-                            </button>
-                            </MenuItem>
-                        </div>
-
-                        <div class="px-1 py-1">
-                            <MenuItem v-slot="{ active }">
-                            <button :class="[
-                                active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                            ]">
-                                <DeleteIcon :active="active" class="mr-2 h-5 w-5 text-violet-400" aria-hidden="true" />
-                                Delete
-                            </button>
-                            </MenuItem>
-                        </div>
-                    </MenuItems>
+                    <PostActions ref="postActionRef" v-if="modals.modalPostActionVisible"/>
                 </transition>
             </Menu>
         </div>
@@ -114,7 +59,7 @@
             </div>
             <Popover class="relative">
                 <PopoverButton class="flex items-center ring-0 focus:ring-0 focus:outline-0"
-                    @click="handleTogglePopupShare">
+                    @click="handleToggleModal($event, 'modalShareVisible')">
                     <ShareIcon class="w-6 h-6 mr-1" />
                     <span>{{ $t("share") }}</span>
                 </PopoverButton>
@@ -122,8 +67,8 @@
                     enter-from-class="translate-y-1 opacity-0" enter-to-class="translate-y-0 opacity-100"
                     leave-active-class="transition duration-150 ease-in" leave-from-class="translate-y-0 opacity-100"
                     leave-to-class="translate-y-1 opacity-0">
-                    <ShareModal ref="shareModalRef" v-if="popupShareVisible" :url="435"
-                        :close="handleTogglePopupShare" />
+                    <ShareModal ref="shareModalRef" v-if="modals.modalShareVisible" :url="435"
+                        :close="(event) => handleToggleModal(event, 'modalShareVisible')" />
                 </transition>
             </Popover>
         </div>
@@ -134,25 +79,33 @@ import {
     HandThumbUpIcon,
     HeartIcon,
     ChatBubbleOvalLeftIcon,
-    ShareIcon
+    ShareIcon,
 } from "@heroicons/vue/24/outline";
-import { Popover, PopoverButton, Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+import { Popover, PopoverButton, Menu, MenuButton } from '@headlessui/vue'
 import ShareModal from "./modals/ShareModal.vue";
 import { useI18n } from 'vue-i18n';
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, nextTick } from "vue";
+import PostActions from "./modals/PostActions.vue";
 
 const { t } = useI18n();
 
-const popupShareVisible = ref(false)
 const shareModalRef = ref(null);
-const popoverButtonRef = ref(null);
-
-const handleTogglePopupShare = () => {
-    popupShareVisible.value = !popupShareVisible.value
+const postActionRef = ref(null);
+const modals = ref({
+    modalShareVisible: false,
+    modalPostActionVisible: false
+})
+const handleToggleModal = (event, modal) => {
+    event.stopPropagation();
+    modals.value[modal] = !modals.value[modal]
 }
+
 const handleClickOutside = (event) => {
     if (shareModalRef.value && !shareModalRef.value.$el.contains(event.target)) {
-        popupShareVisible.value = false;
+        modals.value.modalShareVisible = false;
+    }
+    if (postActionRef.value && !postActionRef.value.$el.contains(event.target)) {
+        modals.value.modalPostActionVisible = false;
     }
 }
 onMounted(() => {
