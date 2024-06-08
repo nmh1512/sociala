@@ -5,6 +5,7 @@
                 <Stories />
                 <CreatePost />
                 <Post />
+                <FriendsRecommend />
             </div>
             <div class="flex-initial hidden lg:block w-3/10">
                 <div class="bg-white shadow-custom-xs rounded-2xl">
@@ -76,6 +77,7 @@ import Stories from './../components/Stories.vue'
 import CreatePost from '../components/CreatePost.vue';
 import { useI18n } from 'vue-i18n';
 import { getColorTheme } from "../helpers/helpers";
+import FriendsRecommend from '../components/FriendsRecommend.vue';
 
 const { t } = useI18n();
 const friendRequest = [

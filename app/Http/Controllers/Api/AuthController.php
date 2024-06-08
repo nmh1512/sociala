@@ -1,27 +1,30 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\RegisterRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\RegisterRequest;
 use App\Models\User;
+use App\Traits\RespondsWithHttpStatus;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
+    use RespondsWithHttpStatus;
     public function register(RegisterRequest $request)
     {
         try {
-            
-        } catch (Exception $e) {
-            Log::channel('schedule')->error('Error: '. $e->getMessage() .', File: '. $e->getFile() .', Line: '. $e->getFile());
-            return response()->json([
-                'error' => 'Something went wrong',
-                500
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password)
             ]);
+            $this->success(__('messages.success'), $user->only('name', 'email'));
+        } catch (Exception $e) {
+            $this->failure(__('messages.error'));
         }
     }
     /**
@@ -33,7 +36,7 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 

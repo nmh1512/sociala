@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,7 +22,8 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'username',
+        'password'
     ];
 
     /**
@@ -64,5 +67,24 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->generateUsername();
+        });
+    }
+
+
+    public function generateUsername()
+    {
+        $username = \Str::lower($this->name); 
+        $username = str_replace(' ', '', $username); 
+        $randomString = \Str::random(5);
+
+        $this->username = $username .'_'. $randomString;
     }
 }
