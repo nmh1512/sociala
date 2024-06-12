@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Traits\RespondsWithHttpStatus;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -22,9 +23,10 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' => bcrypt($request->password)
             ]);
-            $this->success(__('messages.success'), $user->only('name', 'email'));
+            return $this->success(__('messages.success'), $user->only('name', 'email'));
         } catch (Exception $e) {
-            $this->failure(__('messages.error'));
+            Log::error($e->getMessage());
+            return $this->failure(__('messages.error'));
         }
     }
     /**
